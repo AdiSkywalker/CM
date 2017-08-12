@@ -5,10 +5,11 @@ class AppController {
     constructor($http, $element) {
         this.$http = $http;
         this.$element = $element;
+        this.url = 'http://localhost:8090/code';
     }
 
     $onInit() {
-        this.$outputEl = this.$element.find('#output'); 
+        this.$outputEl = this.$element.find('#output');
         this.outputEl = this.$element.find('#output')[0];
         this.editorEl = this.$element.find('#editor')[0];
         this.editorConfig = {
@@ -27,13 +28,23 @@ class AppController {
     }
 
     run() {
-        this.$http.post('http://localhost:8090/code',{code:this.editor.getValue()})
-            .then(response => {
-                this.$outputEl.html(response.data.result);
-            });
-        /*const code = this.editor.getValue();
-        const scriptTag = angular.element('<script/>', { text: code });
-        this.$element.append(scriptTag);*/
+        const codeConfig = {
+            code: this.editor.getValue(),
+            id: 1
+        };
+        console.log(JSON.stringify(codeConfig));
+        /*this.$http
+            .post(this.url, codeConfig)
+            .then(this.handleSuccess)
+            .catch(this.handleError)*/
+    }
+
+    handleSuccess(response){
+        console.log(response.data)
+    }
+
+    handleError(rejection){
+        console.log(rejection)
     }
 }
 

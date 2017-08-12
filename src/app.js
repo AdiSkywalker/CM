@@ -1,6 +1,6 @@
 const moduleName = 'bap';
 
-const module = angular.module('bap',[]);
+const module = angular.module(moduleName,[]);
 
 export default module;
 
